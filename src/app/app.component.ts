@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { IProduct } from './models/product';
 import { ProductsService } from './services/products.service';
 
@@ -9,8 +10,8 @@ import { ProductsService } from './services/products.service';
 })
 export class AppComponent implements OnInit {
    title = 'angular-first-project';
-   products: IProduct[] = []
    loading = false; // loading indicator
+   products$: Observable<IProduct[]>;
 
    constructor(private productsService: ProductsService) {
 
@@ -18,9 +19,8 @@ export class AppComponent implements OnInit {
 
    ngOnInit(): void {
       this.loading = true;
-      this.productsService.getAll().subscribe(products => {
-         this.products = products;
-         this.loading = false;
-      })
+      this.products$ = this.productsService.getAll().pipe(
+         tap(() => this.loading = false)
+      );
    }
 }
