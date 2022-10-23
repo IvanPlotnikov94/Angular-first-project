@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
    title = 'angular-first-project';
    loading = false; // loading indicator
    products$: Observable<IProduct[]>;
+   phrase = ""; // Search phrase for products
 
    constructor(private productsService: ProductsService) {
 
