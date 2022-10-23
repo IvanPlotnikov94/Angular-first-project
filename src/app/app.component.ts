@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, Observable, tap } from 'rxjs';
 import { IProduct } from './models/product';
+import { ModalService } from './services/modal.service';
 import { ProductsService } from './services/products.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
    products$: Observable<IProduct[]>;
    phrase = ""; // Search phrase for products
 
-   constructor(private productsService: ProductsService) {
+   constructor(private productsService: ProductsService,
+      public modalService: ModalService) {
 
    }
 
