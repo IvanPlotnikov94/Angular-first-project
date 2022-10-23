@@ -7,11 +7,12 @@
    />
 
    <p
-      *ngIf="productTitle.errors?.minlength"
-      class="text-red-600 font-medium mb-2"
+      *ngIf="productTitle.errors?.minlength && productTitle.touched"
+      class="text-red-600 font-medium text-sm mb-2"
    >
       Not enough length for the title field! Must be not less than
-      {{ productTitle.errors?.minlength?.requiredLength }}
+      {{ productTitle.errors?.minlength?.requiredLength }}. Now
+      {{ productTitle.value?.length }}.
    </p>
 
    <div class="flex items-center justify-center">
