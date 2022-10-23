@@ -3,19 +3,18 @@
 <div class="max-w-2xl container mx-auto pt-5">
    <h1 class="font-bold mb-2 text-center text-lg">{{ title | titlecase }}</h1>
 
-   <input
-      type="text"
-      class="mb-2 border px-3 py-2 w-full"
-      placeholder="Filter products by title"
-      [(ngModel)]="phrase"
-   />
-
    <p *ngIf="loading" class="text-center text-lg">Loading...</p>
 
-   <div *ngIf="products$ | async as products">
+   <div *ngIf="productsService.products.length > 0">
+      <input
+         type="text"
+         class="mb-2 border px-3 py-2 w-full"
+         placeholder="Filter products by title"
+         [(ngModel)]="phrase"
+      />
       <app-product
          *ngFor="
-            let product of products | filterProducts: phrase;
+            let product of productsService.products | filterProducts: phrase;
             let i = index
          "
          [product]="product"

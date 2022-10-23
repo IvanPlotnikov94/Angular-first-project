@@ -32,7 +32,7 @@ export class CreateProductComponent implements OnInit {
 
    submit() {
       this.productService.create({
-         title: this.form.value as string,
+         title: this.form.value.productTitle as string,
          price: 13.5,
          description: 'lorem ipsum set',
          image: 'https://i.pravatar.cc',

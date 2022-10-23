@@ -12,19 +12,25 @@ import { ProductsService } from './services/products.service';
 export class AppComponent implements OnInit {
    title = 'angular-first-project';
    loading = false; // loading indicator
-   products$: Observable<IProduct[]>;
+   //products$: Observable<IProduct[]>;
    phrase = ""; // Search phrase for products
 
-   constructor(private productsService: ProductsService,
+   constructor(public productsService: ProductsService,
       public modalService: ModalService) {
 
    }
 
    ngOnInit(): void {
       this.loading = true;
-      this.products$ = this.productsService.getAll().pipe(
-         //tap(() => this.loading = false),
+      // this.products$ = this.productsService.getAll().pipe(
+      //    //tap(() => this.loading = false),
+      //    finalize(() => this.loading = false)
+      // );
+
+      this.productsService.getAll().pipe(
          finalize(() => this.loading = false)
-      );
+      ).subscribe(() => {
+         this.loading = false;
+      })
    }
 }
