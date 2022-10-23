@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { finalize, Observable, tap } from 'rxjs';
 import { IProduct } from './models/product';
 import { ProductsService } from './services/products.service';
 
@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
    ngOnInit(): void {
       this.loading = true;
       this.products$ = this.productsService.getAll().pipe(
-         tap(() => this.loading = false)
+         //tap(() => this.loading = false),
+         finalize(() => this.loading = false)
       );
    }
 }
